@@ -1,38 +1,54 @@
-import React from 'react'
 import { login } from '../app/features/userSlice'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import { Link } from 'react-router-dom'
 const Login = () => {
 let {user} = useSelector((store) => store.user)
 let dispatch = useDispatch()
 
+
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
 
+
+
 const handleSubmit = (e) => {
   e.preventDefault();
-
-  if (username && password) {
+  
+  if (username && password && email && password === repassword) {
     dispatch(login(1)); 
+  }else if(password && repassword && password !== repassword){
+    toast.error("Parollar mos emas")
   } else {
-    alert('Iltimos, barcha maydonlarni to‘ldiring.');
+    toast.info('Iltimos, barcha maydonlarni toldiring.');
   }
-};
+  console.log(email , username , password);
+
+  };
+  
+
+
+
 if (user !== null) {
   return <Navigate to="/" />;
 }
 
   return (
-    <div className='flex justify-center items-center h-screen bg-gray-100'>
-      <form onSubmit={handleSubmit} className='bg-white p-8 shadow-md space-y-5 rounded w-80'>
-        <h3>Login</h3>
-        <input type="text" placeholder='username' className='outline-none border-b-1 w-full' value={username}
-          onChange={(e) => setUsername(e.target.value)}/>
-        <input type="password" placeholder='parol' className='outline-none border-b-1 w-full' value={password}
-          onChange={(e) => setPassword(e.target.value)} />
-        <button type='submit' className='block text-center bg-blue-500 w-full text-white h-7 rounded-md'>Login</button>
+    <div className='flex justify-start items-center h-screen bg-cover bg-right' style={{backgroundImage: `url(/login-bg.jpg)`}}  >
+      <form onSubmit={handleSubmit} className='bg-gray-200 p-20 ml-20 shadow-2xl space-y-5 rounded-xl w-[40%] max-lg:p-15 max-md:p-10 max-sm:w-[80%] max-sm:mx-auto' >
+        <h3 className='text-xl font-semibold'>Login</h3>
+        
+        <input type="text" placeholder='UserName' className='outline-none border-b-1 w-full' value={username}
+          onChange={(e) => setUsername(e.target.value)} required />
+        <input type="password" placeholder='Password' className='outline-none border-b-1 w-full' value={password}
+          onChange={(e) => setPassword(e.target.value)} required/>
+        
+        <button type='submit' className='block text-center bg-blue-500 w-full text-white h-10 rounded-md'>Sing Up</button>
+        <p>If you are new to the site, you can <Link className='text-green-600 font-bold' to="/signup">SignUp</Link>.</p>
       </form>
+      <ToastContainer theme='dark' position='top-center' />
     </div>
   )
 }

@@ -39,7 +39,7 @@ const App = () => {
       element:user ? <Navigate to="/"/> : <Login/>
     },
     {
-      path: '/singup',
+      path: '/signup',
       element:user ? <Navigate to="/"/> : <SignUp/>
     }
   ])
