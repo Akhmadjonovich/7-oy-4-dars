@@ -17,14 +17,12 @@ const [password, setPassword] = useState('');
 const handleSubmit = (e) => {
   e.preventDefault();
   
-  if (username && password && email && password === repassword) {
+  if (username && password) {
     dispatch(login(1)); 
-  }else if(password && repassword && password !== repassword){
-    toast.error("Parollar mos emas")
   } else {
     toast.info('Iltimos, barcha maydonlarni toldiring.');
   }
-  console.log(email , username , password);
+  console.log({username , password});
 
   };
   
@@ -45,7 +43,7 @@ if (user !== null) {
         <input type="password" placeholder='Password' className='outline-none border-b-1 w-full' value={password}
           onChange={(e) => setPassword(e.target.value)} required/>
         
-        <button type='submit' className='block text-center bg-blue-500 w-full text-white h-10 rounded-md'>Sing Up</button>
+        <button type='submit' className='block text-center bg-blue-500 w-full text-white h-10 rounded-md'>Login</button>
         <p>If you are new to the site, you can <Link className='text-green-600 font-bold' to="/signup">SignUp</Link>.</p>
       </form>
       <ToastContainer theme='dark' position='top-center' />
