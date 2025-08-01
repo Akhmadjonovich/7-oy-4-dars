@@ -8,9 +8,13 @@ import Login from './pages/Login'
 import SignUp from './pages/SingUp'
 import { useSelector } from 'react-redux'
 import ProtectedRoutes from './components/ProtectedRoutes'
-
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebasa/config'
+import { login, authReady } from './app/features/userSlice'
+import { useDispatch } from 'react-redux'
 const App = () => {
-  let {user} = useSelector((store) => store.user)
+  let dispatch = useDispatch()
+  let {user, isAuthReady} = useSelector((store) => store.user)
   let routes = createBrowserRouter([
     {
       path: "/",
@@ -43,7 +47,18 @@ const App = () => {
       element:user ? <Navigate to="/"/> : <SignUp/>
     }
   ])
-  return <RouterProvider router={routes}/>
+
+
+  onAuthStateChanged(auth, (user) => {
+    dispatch(login(user))
+    dispatch(authReady())
+  })
+
+  return <>
+  {
+    isAuthReady && <RouterProvider router={routes}/>
+  }
+  </>
 }
 
 export default App

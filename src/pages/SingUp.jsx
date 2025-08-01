@@ -18,6 +18,11 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let formData = new FormData(e.target)
+    let displayName = formData.get("displayName")
+    let email = formData.get("email")
+    let password = formData.get("password")
+
     if (!displayName || !email || !password || !repassword) {
       toast.info('Iltimos, barcha maydonlarni toldiring.');
       return;
@@ -27,13 +32,12 @@ const SignUp = () => {
       toast.error("Parollar mos emas");
       return;
     }
+    
+    
+    signup( displayName, email, password );
 
     
-    signup({ displayName, email, password });
-
     
-    dispatch(login(1));
-    console.log({ email, displayName, password });
   }
 
   if (user !== null) {
