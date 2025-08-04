@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyCqNp7lMzwyy_QDbmNPfxtLVYnyom1QmYc",
   authDomain: "redux-project-b04b4.firebaseapp.com",
@@ -14,3 +14,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export let auth = getAuth(app)
+
+export let db = getFirestore()

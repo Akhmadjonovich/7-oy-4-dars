@@ -1,4 +1,4 @@
-import { login } from '../app/features/userSlice'
+import { login as _login } from '../app/features/userSlice'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ let {user} = useSelector((store) => store.user)
 let dispatch = useDispatch()
 let {isPending, login} = useLogin()
 
-const [username, setUsername] = useState('');
+const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 
 
@@ -19,16 +19,15 @@ const [password, setPassword] = useState('');
 const handleSubmit = (e) => {
   e.preventDefault();
   
-  if (username && password) {
-    dispatch(login(1)); 
+  if (email && password) {
+    dispatch(_login(1)); 
   } else {
     toast.info('Iltimos, barcha maydonlarni toldiring.');
   }
-  console.log({username , password});
 
+  login(email, password)
   };
   
-
 
 
 if (user !== null) {
@@ -40,8 +39,8 @@ if (user !== null) {
       <form onSubmit={handleSubmit} className='bg-gray-200 p-20 ml-20 shadow-2xl space-y-5 rounded-xl w-[40%] max-lg:p-15 max-md:p-10 max-sm:w-[80%] max-sm:mx-auto' >
         <h3 className='text-xl font-semibold'>Login</h3>
         
-        <input type="text" placeholder='UserName' className='outline-none border-b-1 w-full' value={username}
-          onChange={(e) => setUsername(e.target.value)} required />
+        <input type="email" placeholder='Email' className='outline-none border-b-1 w-full' value={email}
+          onChange={(e) => setEmail(e.target.value)} required />
         <input type="password" placeholder='Password' className='outline-none border-b-1 w-full' value={password}
           onChange={(e) => setPassword(e.target.value)} required/>
         

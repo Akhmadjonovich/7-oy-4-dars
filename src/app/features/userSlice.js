@@ -10,7 +10,7 @@ let userSlice = createSlice({
         login: (state, {payload}) => {
             state.user = payload;
         },
-        logout: (state, {payload}) => {
+        logOut: (state, {payload}) => {
             state.user = null
         },
         authReady: (state, {payload}) =>{
@@ -19,5 +19,5 @@ let userSlice = createSlice({
     },
 });
 
-export let {login, logout, authReady} = userSlice.actions
+export let {login, logOut, authReady} = userSlice.actions
 export default userSlice.reducer
