@@ -50,7 +50,7 @@ export const useSignup = () => {
           online: true,
           displayName: displayName,
           photoURL: photoURL,
-          uid: user.uid,
+          email: user.email,
           createdAt: new Date(),
         })
       } catch (fsError) {

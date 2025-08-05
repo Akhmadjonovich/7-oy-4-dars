@@ -10,8 +10,8 @@ const Navbar = () => {
     <><nav className='bg-blue-600 text-white p-4 flex justify-between'>
       
 
-      <h2>Welcome, {user.displayName}</h2>
-      <div className='space-x-4 flex items-center'>
+      <h2 className='text-3xl max-md:text-xl max-sm:text-sm'>Welcome, {user.displayName}</h2>
+      <div className='space-x-4 flex text-xl max-sm:text-sm items-center'>
         <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
       <img src={user.photoURL} className='w-7' alt="" />
